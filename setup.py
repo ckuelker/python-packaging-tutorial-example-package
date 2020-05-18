@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="example-pkg-ckuelker", # Replace with your own username
     version="0.0.1",
-    author="Christian Külker",
+    author="Christian Kuelker",
     author_email="test-pypi-org@c8i.org",
     description="A small example package",
     long_description=long_description,
