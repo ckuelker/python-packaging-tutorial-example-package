@@ -3,9 +3,12 @@
 # |                                                                           |
 # | Example Test Package example_pkg mechanics                                |
 # |                                                                           |
-# | Version: 0.1.1 (change inline)                                            |
+# | Version: 0.1.2 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.2 2020-05-18 Christian Külker <c@c8i.org>                             |
+# |     - add build rules for poetry (rename setuptool build)                 |
 # |                                                                           |
 # | 0.1.1 2020-05-18 Christian Külker <c@c8i.org>                             |
 # |     - execute some tasks with bash (to have source command)               |
@@ -36,8 +39,10 @@ usage:
 	@echo "make clean     : remove prcess files"
 	@echo "make realclean : remove target"
 	@echo "make test      : debug test"
-	@echo "make build2    : build project with python2"
-	@echo "make build3    : build project with python3"
+	@echo "make sbuild2   : build project with python2 setuptools"
+	@echo "make sbuild3   : build project with python3 setuptools"
+	@echo "make pbuild2   : build project with python2 poetry"
+	@echo "make pbuild3   : build project with python3 poetry"
 	@echo "make uplodad2  : uplodad to test.pypi.org with python2"
 	@echo "make uplodad3  : uplodad to test.pypi.org with python3"
 	@echo "make install2  : install from test.pypi.org with python2"
@@ -58,10 +63,14 @@ test:
 	virtualenv -p /usr/bin/python3 .venv2
 .venv3:
 	virtualenv -p /usr/bin/python3 .venv3
-build2: .venv2
+sbuild2: .venv2
 	bash -c 'source .venv2/bin/activate && python2 setup.py sdist bdist_wheel'
-build3: .venv3
+sbuild3: .venv3
 	bash -c 'source .venv3/bin/activate && python3 setup.py sdist bdist_wheel'
+pbuild2: .venv2
+	bash -c 'source .venv2/bin/activate && poetry build'
+pbuild3: .venv3
+	bash -c 'source .venv3/bin/activate && poetry build'
 upload2:
 	bash -c 'source .venv2/bin/activate && python2 -m twine upload --repository testpypi dist/*'
 upload3:
