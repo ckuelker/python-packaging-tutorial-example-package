@@ -3,9 +3,12 @@
 # |                                                                           |
 # | Example Test Package example_pkg mechanics                                |
 # |                                                                           |
-# | Version: 0.1.0 (change inline)                                            |
+# | Version: 0.1.1 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.1 2020-05-18 Christian Külker <c@c8i.org>                             |
+# |     - execute some tasks with bash (to have source command)               |
 # |                                                                           |
 # | 0.1.0 2020-05-18 Christian Külker <c@c8i.org>                             |
 # |     - initial release                                                     |
@@ -56,15 +59,15 @@ test:
 .venv3:
 	virtualenv -p /usr/bin/python3 .venv3
 build2: .venv2
-	source .venv2/bin/activate && python2 setup.py sdist bdist_wheel
+	bash -c 'source .venv2/bin/activate && python2 setup.py sdist bdist_wheel'
 build3: .venv3
-	source .venv3/bin/activate && python3 setup.py sdist bdist_wheel
+	bash -c 'source .venv3/bin/activate && python3 setup.py sdist bdist_wheel'
 upload2:
-	source .venv2/bin/activate && python2 -m twine upload --repository testpypi dist/*
+	bash -c 'source .venv2/bin/activate && python2 -m twine upload --repository testpypi dist/*'
 upload3:
-	source .venv3/bin/activate && python3 -m twine upload --repository testpypi dist/*
+	bash -c 'source .venv3/bin/activate && python3 -m twine upload --repository testpypi dist/*'
 install2:
-	source .venv2/bin/activate && python2 -m pip install --index-url https://test.pypi.org/simple/ --no-deps $(UPLOAD)-$(USERNAME)
+	bash -c 'source .venv2/bin/activate && python2 -m pip install --index-url https://test.pypi.org/simple/ --no-deps $(UPLOAD)-$(USERNAME)'
 install3:
-	source .venv3/bin/activate && python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps $(UPLOAD)-$(USERNAME)
+	bash -c 'source .venv3/bin/activate && python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps $(UPLOAD)-$(USERNAME)'
 
