@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "example-pkg_ckuelker"
+version = "0.0.1"
+description = "A small example package"
+license = "GPLv3"
+authors = [
+    "Christian Külker <test-pypi-org@c8i.org>",
+]
+readme = 'README.md'  # Markdown files are supported
+repository = "https://github.com/ckuelker/python-packaging-tutorial-example-package"
+homepage = "https://github.com/ckuelker/python-packaging-tutorial-example-package"
+keywords = ['packaging', 'tutorial']
+
+[tool.poetry.dependencies]
+python = "~2.7 || ^3.4"  # Compatible python versions must be declared here
+toml = "^0.9"
+# Dependencies with extras
+requests = { version = "^2.13", extras = [ "security" ] }
+# Python specific dependencies with prereleases allowed
+pathlib2 = { version = "^2.2", python = "~2.7", allow-prereleases = true }
+# Very "securre" Git dependencies
+# some = { git = "https://github.com/disaster/include.git", branch = "master" }
+
+# Optional dependencies (extras)
+# mordor = { version = "^1.4", optional = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+pytest-cov = "^2.4"
+
+[tool.poetry.scripts]
+my-script = 'my_package:main'
